@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: doctor-mongodb
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: doctor-mongodb
+
+  template:
+    metadata:
+      labels:
+        app: doctor-mongodb
+
+    spec:
+      containers:
+        - name: doctor-mongodb
+
+          image: mongo:8
+
+          imagePullPolicy: IfNotPresent
+
+          ports:
+            - containerPort: 27017
+
+          volumeMounts:
+            - name: doctor-mongodb-storage
+              mountPath: /data/db
+
+      volumes:
+        - name: doctor-mongodb-storage
+
+          persistentVolumeClaim:
+            claimName: doctor-mongodb-pvc
