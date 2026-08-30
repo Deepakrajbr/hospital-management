@@ -10,7 +10,7 @@ const MONGO_URI =
   process.env.MONGO_URI || "mongodb://localhost:27017/doctor-db";
 
 app.get("/", (req, res) => {
-  res.send("Doctor Service Running");
+  res.send("Doctor Service Running - CI/CD v2");
 });
 
 app.get("/api/doctors", async (req, res) => {
