@@ -5,10 +5,6 @@ const app = express();
 
 app.use(express.json());
 
-const PORT = process.env.PORT || 5002;
-const MONGO_URI =
-  process.env.MONGO_URI || "mongodb://localhost:27017/doctor-db";
-
 app.get("/", (req, res) => {
   res.send("Doctor Service Running - CI/CD v2");
 });
@@ -28,16 +24,27 @@ app.get("/api/doctors", async (req, res) => {
   ]);
 });
 
-mongoose
-  .connect(MONGO_URI)
-  .then(() => {
+const PORT = process.env.PORT || 5002;
+const MONGO_URI =
+  process.env.MONGO_URI || "mongodb://localhost:27017/doctor-db";
+
+async function startServer() {
+  try {
+    await mongoose.connect(MONGO_URI);
+
     console.log("MongoDB Connected");
 
     app.listen(PORT, () => {
       console.log(`Doctor Service running on ${PORT}`);
     });
-  })
-  .catch((err) => {
+  } catch (err) {
     console.error("MongoDB connection failed:", err.message);
     process.exit(1);
-  });
+  }
+}
+
+if (require.main === module) {
+  startServer();
+}
+
+module.exports = app;
