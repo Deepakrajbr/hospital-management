@@ -30,7 +30,7 @@ pipeline {
             steps {
             sh '''
             cd services/doctor-service
-            npm install
+            npm ci
             npm test
             '''
                 
@@ -74,15 +74,22 @@ pipeline {
             }
         }
 
-        stage('Deploy to Kubernetes') {
-            steps {
-                sh '''
-                    kubectl set image deployment/doctor-service \
-                        doctor-service=deepakraj172004/doctor-service:${IMAGE_TAG}
+        stage('Verify Deployment') {
+    steps {
+        sh '''
+            kubectl get pods -l app=doctor-service
 
-                    kubectl rollout status deployment/doctor-service
-                '''
-            }
-        }
+            kubectl get deployment doctor-service \
+                -o jsonpath='{.spec.template.spec.containers[*].image}'
+
+            echo ""
+
+            kubectl rollout status deployment/doctor-service
+
+            kubectl get pods -l app=doctor-service \
+                -o wide
+        '''
+    }
+}
     }
 }
