@@ -17,9 +17,9 @@ spec:
         app: auth-service
 
     spec:
-      containers: 
+      containers:
         - name: auth-service
-          image: deepakraj172004/auth-service:v1
+          image: deepakraj172004/auth-service:latest
 
           ports:
             - containerPort: 5001
@@ -32,4 +32,7 @@ spec:
               value: "mongodb://mongodb:27017/auth-db"
 
             - name: JWT_SECRET
-              value: # JWT_SECRET will be added using Kubernetes Secret
+              valueFrom:
+                secretKeyRef:
+                  name: hospital-secret
+                  key: JWT_SECRET

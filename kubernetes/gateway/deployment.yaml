@@ -27,10 +27,19 @@ spec:
 
           env:
             - name: PORT
-              value: "5000"
+              valueFrom:
+                configMapKeyRef:
+                  name: hospital-config
+                  key: GATEWAY_PORT
 
             - name: AUTH_SERVICE_URL
-              value: "http://auth-service:5001"
+              valueFrom:
+                configMapKeyRef:
+                  name: hospital-config
+                  key: AUTH_SERVICE_URL
 
             - name: DOCTOR_SERVICE_URL
-              value: "http://doctor-service:5002"
+              valueFrom:
+                configMapKeyRef:
+                  name: hospital-config
+                  key: DOCTOR_SERVICE_URL
