@@ -4,45 +4,85 @@ import { useNavigate } from "react-router-dom";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
 
-    // We'll connect this to Auth Service later.
-    console.log("Login:", email, password);
+    if (!email || !password) {
+      setError("Please enter your email and password.");
+      return;
+    }
 
+    setError("");
     navigate("/home");
   };
 
   return (
-    <div>
-      <h1>Hospital Management</h1>
+    <div className="login-page">
+      <div className="login-left">
+        <div className="login-brand">
+          <div className="brand-icon">✚</div>
+          <strong>CareFlow</strong>
+        </div>
 
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        <div className="login-intro">
+          <span>SMARTER HEALTHCARE</span>
 
-        <br />
+          <h1>
+            Healthcare that
+            <br />
+            works <em>for you.</em>
+          </h1>
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+          <p>
+            Manage appointments, doctors and your healthcare journey
+            from one simple platform.
+          </p>
+        </div>
+      </div>
 
-        <br />
+      <div className="login-right">
+        <form className="login-card" onSubmit={handleLogin}>
+          <span className="section-label">WELCOME BACK</span>
 
-        <button type="submit">
-          Login
-        </button>
-      </form>
+          <h2>Sign in</h2>
+
+          <p className="login-subtitle">
+            Enter your details to access your hospital portal.
+          </p>
+
+          <label>Email address</label>
+
+          <input
+            type="email"
+            placeholder="you@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
+          <label>Password</label>
+
+          <input
+            type="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+
+          {error && <p className="error-message">{error}</p>}
+
+          <button className="login-button" type="submit">
+            Sign in →
+          </button>
+
+          <p className="demo-text">
+            Demo login — any valid email and password will work.
+          </p>
+        </form>
+      </div>
     </div>
   );
 }
