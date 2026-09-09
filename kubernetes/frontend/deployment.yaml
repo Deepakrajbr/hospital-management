@@ -13,6 +13,7 @@ spec:
         app: frontend
     spec:
       containers:
+      
         - name: frontend
           image: deepakraj172004/frontend:latest
           ports:
