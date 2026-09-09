@@ -21,6 +21,7 @@ function Navbar() {
         <NavLink to="/home">Dashboard</NavLink>
         <NavLink to="/doctors">Doctors</NavLink>
         <NavLink to="/admin">Admin</NavLink>
+        
       </div>
 
       <button className="logout-btn" onClick={handleLogout}>
