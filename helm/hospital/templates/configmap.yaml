@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hospital-config
+data:
+  GATEWAY_PORT: "{{ .Values.config.gatewayPort }}"
+  AUTH_SERVICE_URL: "{{ .Values.config.authServiceUrl }}"
+  DOCTOR_SERVICE_URL: "{{ .Values.config.doctorServiceUrl }}"

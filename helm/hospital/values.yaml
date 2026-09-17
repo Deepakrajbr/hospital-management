@@ -1,0 +1,36 @@
+auth:
+  replicas: 2
+  image: deepakraj172004/auth-service:latest
+  port: 5001
+
+doctor:
+  replicas: 2
+  image: deepakraj172004/doctor-service:v1
+  port: 5002
+
+gateway:
+  replicas: 2
+  image: deepakraj172004/gateway:v1
+  port: 5000
+
+frontend:
+  replicas: 2
+  image: deepakraj172004/frontend:a57c99d
+  port: 80
+
+mongodb:
+  image: mongo:8
+  port: 27017
+  storage: 1Gi
+
+config:
+  gatewayPort: "5000"
+  authServiceUrl: "http://auth-service:5001"
+  doctorServiceUrl: "http://doctor-service:5002"
+
+secret:
+  jwtSecret: "hospital-dev-secret"
+
+ingress:
+  enabled: true
+  className: nginx
