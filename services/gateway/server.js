@@ -29,7 +29,10 @@ app.use(
   "/api/doctors",
   createProxyMiddleware({
     target: DOCTOR_SERVICE_URL,
-    changeOrigin: true
+    changeOrigin: true,
+    pathRewrite: {
+      "^/api/doctors": "/api/doctors"
+    }
   })
 );
 
