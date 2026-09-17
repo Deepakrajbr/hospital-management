@@ -30,4 +30,4 @@ spec:
               value: "5002"
 
             - name: MONGO_URI
-              value: "mongodb://doctor-mongodb:27017/doctor-db"
+              value: "mongodb://mongodb:27017/doctor-db"
