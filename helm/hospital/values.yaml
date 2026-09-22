@@ -1,6 +1,6 @@
 auth:
   replicas: 2
-  image: deepakraj172004/auth-service:latest
+  image: deepakraj172004/auth-service:529beab
   port: 5001
 
 doctor:
