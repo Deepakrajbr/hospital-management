@@ -31,7 +31,7 @@ app.use(
     target: DOCTOR_SERVICE_URL,
     changeOrigin: true,
     pathRewrite: {
-      "^/api/doctors": "/api/doctors"
+      "^/": "/api/doctors"
     }
   })
 );
