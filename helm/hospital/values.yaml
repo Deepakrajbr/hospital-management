@@ -5,17 +5,17 @@ auth:
 
 doctor:
   replicas: 2
-  image: deepakraj172004/doctor-service:v1
+  image: deepakraj172004/doctor-service:4ee8c28
   port: 5002
 
 gateway:
   replicas: 2
-  image: deepakraj172004/gateway:v1
+  image: deepakraj172004/gateway:4ee8c28
   port: 5000
 
 frontend:
   replicas: 2
-  image: deepakraj172004/frontend:a57c99d
+  image: deepakraj172004/frontend:4ee8c28
   port: 80
 
 mongodb:
